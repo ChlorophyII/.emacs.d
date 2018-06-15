@@ -88,11 +88,28 @@
   :config
   (global-flycheck-mode t))
 
-(use-package auto-complete ; Auto Completion for GNU Emacs
+(use-package company ; Modular text completion framework
   :ensure t
-  :hook (LaTeX-mode . auto-complete-mode)
   :config
-  (global-auto-complete-mode t))
+  (global-company-mode t)
+  (setq company-backends
+	'((company-files          ; files & directory
+           company-keywords       ; keywords
+           company-capf
+           company-yasnippet)
+          (company-abbrev company-dabbrev))))
+
+(use-package company-auctex ; Company-mode auto-completion for AUCTeX
+  :ensure t
+  :hook ((LaTeX-mode . company-auctex-init)
+	 (LaTeX-mode . (lambda () (add-to-list (make-local-variable 'company-backends)
+					       'company-auctex)))))
+
+(use-package company-math ; Completion backends for unicode math symbols and latex tags
+  :ensure t
+  :hook (LaTeX-mode . (lambda () (if (display-graphic-p)
+				     (add-to-list (make-local-variable 'company-backends)
+						  '(company-math-symbols-latex company-latex-commands))))))
 
 (use-package multiple-cursors ; Multiple cursors for Emacs
   :ensure t
@@ -193,7 +210,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (multiple-cursors zenburn-theme wc-mode rainbow-mode markdown-mode impatient-mode neotree highlight-parentheses auto-complete flycheck auctex use-package))))
+    (multiple-cursors zenburn-theme wc-mode rainbow-mode markdown-mode impatient-mode neotree highlight-parentheses flycheck auctex use-package))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

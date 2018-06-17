@@ -39,6 +39,7 @@
 		"/usr/local/sbin:"
 		"/Library/TeX/texbin/:"
 		(getenv "PATH")))
+(setq exec-path (split-string (getenv "PATH") path-separator))
 (setq LaTeX-electric-left-right-brace t)
 ;; To use AUCTeX preview, gs is needed
 (cond ((eq system-type 'darwin)
@@ -54,10 +55,10 @@
 (shell-command "source ~/.bashrc")
 
 ;; To enable or disable web development packages
-(setq web-development nil)
+(defvar web-development nil)
 
 ;; ChezScheme is ChlorophyII's default option
-(setq scheme-program-name "chez")
+(defvar scheme-program-name "chez")
 
 ;; =============================================================================
 

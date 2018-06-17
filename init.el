@@ -66,7 +66,8 @@
 
 (use-package latex-extra ; Adds several useful functionalities to LaTeX-mode.
   :ensure t
-  :hook (LaTeX-mode . latex-extra-mode))
+  :hook (LaTeX-mode . latex-extra-mode)
+  :config (defvar latex/override-preview-map nil))
 
 ;; =============================================================================
 

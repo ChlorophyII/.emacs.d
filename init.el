@@ -18,6 +18,27 @@
 
 ;; =============================================================================
 
+;; To autoload bash init file
+(shell-command "source ~/.bashrc")
+
+;; To enable or disable web development packages
+(defvar web-development nil)
+
+;; ChezScheme is ChlorophyII's default option
+(defvar scheme-program-name "chez")
+
+;; =============================================================================
+
+;; Notice the slash after "texbin"
+(setenv "PATH" (concat
+		"/usr/local/bin:"
+		"/usr/local/sbin:"
+		"/Library/TeX/texbin/:"
+		(getenv "PATH")))
+(setq exec-path (split-string (getenv "PATH") path-separator))
+
+;; =============================================================================
+
 ;; To avoid a stupid bug of package-install caused by empty archive
 (unless package-archive-contents
   (package-refresh-contents))
@@ -33,32 +54,19 @@
 (unless (package-installed-p 'auctex)
   (package-install 'auctex))
 (require 'tex)
-;; Notice the slash after "texbin"
-(setenv "PATH" (concat
-		"/usr/local/bin:"
-		"/usr/local/sbin:"
-		"/Library/TeX/texbin/:"
-		(getenv "PATH")))
-(setq exec-path (split-string (getenv "PATH") path-separator))
-(setq LaTeX-electric-left-right-brace t)
+
+(defvar LaTeX-electric-left-right-brace t)
 ;; To use AUCTeX preview, gs is needed
 (cond ((eq system-type 'darwin)
-       (setq preview-gs-command "/usr/local/bin/gs"))
+       (defvar preview-gs-command "/usr/local/bin/gs"))
       ((eq system-type 'gnu/linux)
        (setq preview-gs-command "/usr/bin/gs")))
 
-(setq preview-auto-cache-preamble t)
+(defvar preview-auto-cache-preamble t)
 
-;; =============================================================================
-
-;; To autoload bash init file
-(shell-command "source ~/.bashrc")
-
-;; To enable or disable web development packages
-(defvar web-development nil)
-
-;; ChezScheme is ChlorophyII's default option
-(defvar scheme-program-name "chez")
+(use-package latex-extra ; Adds several useful functionalities to LaTeX-mode.
+  :ensure t
+  :hook (LaTeX-mode . latex-extra-mode))
 
 ;; =============================================================================
 
@@ -78,7 +86,7 @@
     :config
     (with-eval-after-load "sql"
       (load-library "sql-indent"))
-    (setq sql-indent-offset 2))
+    (defvar sql-indent-offset 2))
 
   (use-package impatient-mode ; Serve buffers live over HTTP
     :ensure t
@@ -175,14 +183,16 @@
 (setq initial-scratch-message "")
 (setq inhibit-startup-message t)
 (defun display-startup-echo-area-message ()
+  "The message that appears in the echo area when starting Emacs."
   (message "Emacs Rocks!"))
 
 ;; wraps the lines in org-mode
-(setq org-startup-truncated nil)
+(defvar org-startup-truncated nil)
 
 ;; =============================================================================
 
 (defun add-hook-list (mode-hook hook-list)
+  "Add hooks in HOOK-LIST to some MODE-HOOK."
   (dolist (hook hook-list)
     (add-hook mode-hook hook)))
 

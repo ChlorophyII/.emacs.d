@@ -66,8 +66,11 @@
 
 (use-package latex-extra ; Adds several useful functionalities to LaTeX-mode.
   :ensure t
-  :hook (LaTeX-mode . latex-extra-mode)
-  :config (defvar latex/override-preview-map nil))
+  :hook ((LaTeX-mode . latex-extra-mode)
+	 (LaTeX-mode . turn-off-auto-fill))
+  :init (add-hook 'LaTeX-mode-hook (lambda () (auto-fill-mode -1)) t)
+  ;; DO NOT TOUCH THE PREVIOUS LINE (TURN OFF F**KING ANNOYING AUTO-FILL-MODE)
+  :config (setq latex/override-preview-map nil))
 
 ;; =============================================================================
 

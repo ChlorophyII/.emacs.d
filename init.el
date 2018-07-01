@@ -140,7 +140,9 @@
 
 (use-package wc-mode ; Running word count with goals (minor mode)
   :ensure t
-  :hook text-mode)
+  :hook text-mode
+  :config
+  (setq wc-modeline-format "WC[%w %tw %tc]"))
 
 (use-package rainbow-mode ; Colorize color names in buffers
   :ensure t

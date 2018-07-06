@@ -132,6 +132,11 @@
   (global-set-key (kbd "C-S-p") 'mc/mark-previous-like-thismc)
   (global-set-key (kbd "C-c C-S-n") 'mc/mark-all-like-this))
 
+(use-package move-text ; Move current line or region with M-up or M-down.
+  :ensure t
+  :config
+  (move-text-default-bindings))
+
 (use-package neotree ; A tree plugin like NerdTree for Vim
   :ensure t)
 
@@ -227,7 +232,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (multiple-cursors zenburn-theme wc-mode rainbow-mode markdown-mode impatient-mode neotree highlight-parentheses flycheck auctex use-package))))
+    (move-text multiple-cursors zenburn-theme wc-mode rainbow-mode markdown-mode impatient-mode neotree highlight-parentheses flycheck auctex use-package))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

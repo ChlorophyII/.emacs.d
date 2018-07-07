@@ -207,9 +207,17 @@
   (dolist (hook hook-list)
     (add-hook mode-hook hook)))
 
+(defun my-hs-minor-mode-hook ()
+  (hs-minor-mode t)
+  (local-set-key (kbd "C-+") 'hs-show-all) ;; ctrl+shift+=
+  (local-set-key (kbd "C-_") 'hs-hide-all)   ;; ctrl+shift+-
+  (local-set-key (kbd "C-=") 'hs-show-block)
+  (local-set-key (kbd "C--") 'hs-hide-block))
+
 (add-hook-list 'prog-mode-hook
 	       (list #'linum-mode
-		     #'electric-pair-mode))
+		     #'electric-pair-mode
+		     #'my-hs-minor-mode-hook))
 
 (add-hook-list 'matlab-mode-hook
 	       (list #'linum-mode))

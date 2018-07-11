@@ -79,30 +79,35 @@
   (package-install 'matlab-mode))
 
 (when web-development
-  (use-package web-mode ; Major mode for editing web templates
+  (use-package web-mode
+    ;; Major mode for editing web templates
     :ensure t
     :config
     (add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
     (add-to-list 'auto-mode-alist '("\\.php\\'" . web-mode))
     (add-to-list 'auto-mode-alist '("\\.js\\'" . web-mode)))
 
-  (use-package sql-indent ; Indentation of SQL statements
+  (use-package sql-indent
+    ;; Indentation of SQL statements
     :ensure t
     :config
     (with-eval-after-load "sql"
       (load-library "sql-indent"))
     (defvar sql-indent-offset 2))
 
-  (use-package impatient-mode ; Serve buffers live over HTTP
+  (use-package impatient-mode
+    ;; Serve buffers live over HTTP
     :ensure t
     :hook ((web-mode css-mode) . impatient-mode)))
 
-(use-package flycheck ; On-the-fly syntax checking
+(use-package flycheck
+  ;; On-the-fly syntax checking
   :ensure t
   :config
   (global-flycheck-mode t))
 
-(use-package company ; Modular text completion framework
+(use-package company
+  ;; Modular text completion framework
   :ensure t
   :config
   (global-company-mode t)
@@ -113,19 +118,25 @@
            company-yasnippet)
           (company-abbrev company-dabbrev))))
 
-(use-package company-auctex ; Company-mode auto-completion for AUCTeX
+(use-package company-auctex
+  ;; Company-mode auto-completion for AUCTeX
   :ensure t
   :hook ((LaTeX-mode . company-auctex-init)
-	 (LaTeX-mode . (lambda () (add-to-list (make-local-variable 'company-backends)
-					       'company-auctex)))))
+	 (LaTeX-mode . (lambda ()
+			 (add-to-list (make-local-variable 'company-backends)
+				      'company-auctex)))))
 
-(use-package company-math ; Completion backends for unicode math symbols and latex tags
+(use-package company-math
+  ;; Completion backends for unicode math symbols and latex tags
   :ensure t
-  :hook (LaTeX-mode . (lambda () (if (display-graphic-p)
-				     (add-to-list (make-local-variable 'company-backends)
-						  '(company-math-symbols-latex company-latex-commands))))))
+  :hook (LaTeX-mode . (lambda ()
+			(if (display-graphic-p)
+			    (add-to-list (make-local-variable 'company-backends)
+					 '(company-math-symbols-latex
+					   company-latex-commands))))))
 
-(use-package multiple-cursors ; Multiple cursors for Emacs
+(use-package multiple-cursors
+  ;; Multiple cursors for Emacs
   :ensure t
   :hook ((prog-mode web-mode) . multiple-cursors-mode)
   :config
@@ -133,39 +144,51 @@
   (global-set-key (kbd "C-S-p") 'mc/mark-previous-like-thismc)
   (global-set-key (kbd "C-c C-S-n") 'mc/mark-all-like-this))
 
-(use-package move-text ; Move current line or region with M-up or M-down.
+(use-package move-text
+  ;; Move current line or region with M-up or M-down.
   :ensure t
   :config
   (move-text-default-bindings))
 
-(use-package neotree ; A tree plugin like NerdTree for Vim
+(use-package neotree
+  ;; A tree plugin like NerdTree for Vim
   :ensure t)
 
-(use-package fill-column-indicator ; Graphically indicate the fill column
+(use-package fill-column-indicator
+  ;; Graphically indicate the fill column
   :ensure t
-  :hook (prog-mode . fci-mode))
+  :hook (prog-mode . fci-mode)
+  :config
+  (setq fci-rule-color "#4f4f4f")
+  (setq fci-rule-column 80))
 
-(use-package magit ; A Git porcelain inside Emacs.
+(use-package magit
+  ;; A Git porcelain inside Emacs.
   :ensure t)
 
-(use-package markdown-mode ; Major mode for Markdown-formatted text
+(use-package markdown-mode
+  ;; Major mode for Markdown-formatted text
   :ensure t)
 
-(use-package wc-mode ; Running word count with goals (minor mode)
+(use-package wc-mode
+  ;; Running word count with goals (minor mode)
   :ensure t
   :hook text-mode
   :config
   (setq wc-modeline-format "WC[%w %tw %tc]"))
 
-(use-package rainbow-mode ; Colorize color names in buffers
+(use-package rainbow-mode
+  ;; Colorize color names in buffers
   :ensure t
   :hook css-mode)
 
-(use-package highlight-parentheses ; Highlight surrounding parentheses
+(use-package highlight-parentheses
+  ;; Highlight surrounding parentheses
   :ensure t
   :hook (prog-mode . highlight-parentheses-mode))
 
-(use-package highlight-numbers ; Highlight numbers in source code
+(use-package highlight-numbers
+  ;; Highlight numbers in source code
   :ensure t
   :hook ((prog-mode matlab-mode) . highlight-numbers-mode))
 
@@ -191,6 +214,7 @@
     (progn
       (tool-bar-mode 0)
       (scroll-bar-mode 0)))
+
 (menu-bar-mode 0)
 
 ;; Merge the fringe with background
@@ -205,7 +229,7 @@
   "Appear in the echo area when starting Emacs."
   (message "Emacs Rocks!"))
 
-;; wraps the lines in org-mode
+;; Wrap lines in org-mode
 (defvar org-startup-truncated nil)
 
 ;; =============================================================================
@@ -231,16 +255,11 @@
 (add-hook-list 'matlab-mode-hook
 	       (list #'linum-mode))
 
-(defun LaTeX-paired-dollar-hook ()
-  "Make dollar sign in 'LaTeX-mode' be electric paired."
-  (define-key LaTeX-mode-map (kbd "$") 'self-insert-command))
-
 (add-hook-list 'LaTeX-mode-hook
 	       (list #'linum-mode
-		     (lambda () (set (make-variable-buffer-local 'TeX-electric-math)
+		     (lambda () (set (make-variable-buffer-local
+				      'TeX-electric-math)
 				     (cons "$" "$")))))
-;		     '(lambda ()
-;			 (define-key LaTeX-mode-map (kbd "$") 'self-insert-command))))
 
 (when web-development
   (add-hook-list 'web-mode-hook

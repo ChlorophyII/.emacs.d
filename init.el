@@ -56,6 +56,7 @@
 (require 'tex)
 
 (defvar LaTeX-electric-left-right-brace t)
+(defvar TeX-electric-math t)
 ;; To use AUCTeX preview, gs is needed
 (cond ((eq system-type 'darwin)
        (defvar preview-gs-command "/usr/local/bin/gs"))
@@ -140,6 +141,10 @@
 (use-package neotree ; A tree plugin like NerdTree for Vim
   :ensure t)
 
+(use-package fill-column-indicator ; Graphically indicate the fill column
+  :ensure t
+  :hook (prog-mode . fci-mode))
+
 (use-package magit ; A Git porcelain inside Emacs.
   :ensure t)
 
@@ -197,7 +202,7 @@
 (setq initial-scratch-message "")
 (setq inhibit-startup-message t)
 (defun display-startup-echo-area-message ()
-  "The message that appears in the echo area when starting Emacs."
+  "Appear in the echo area when starting Emacs."
   (message "Emacs Rocks!"))
 
 ;; wraps the lines in org-mode
@@ -211,6 +216,7 @@
     (add-hook mode-hook hook)))
 
 (defun my-hs-minor-mode-hook ()
+  "Change keybindings of hs-show and hs-hide."
   (hs-minor-mode t)
   (local-set-key (kbd "C-+") 'hs-show-all) ;; ctrl+shift+=
   (local-set-key (kbd "C-_") 'hs-hide-all)   ;; ctrl+shift+-
@@ -225,8 +231,16 @@
 (add-hook-list 'matlab-mode-hook
 	       (list #'linum-mode))
 
+(defun LaTeX-paired-dollar-hook ()
+  "Make dollar sign in 'LaTeX-mode' be electric paired."
+  (define-key LaTeX-mode-map (kbd "$") 'self-insert-command))
+
 (add-hook-list 'LaTeX-mode-hook
-	       (list #'linum-mode))
+	       (list #'linum-mode
+		     (lambda () (set (make-variable-buffer-local 'TeX-electric-math)
+				     (cons "$" "$")))))
+;		     '(lambda ()
+;			 (define-key LaTeX-mode-map (kbd "$") 'self-insert-command))))
 
 (when web-development
   (add-hook-list 'web-mode-hook
@@ -250,7 +264,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (magit move-text multiple-cursors zenburn-theme wc-mode rainbow-mode markdown-mode impatient-mode neotree highlight-parentheses flycheck auctex use-package))))
+    (fill-column-indicator magit move-text multiple-cursors zenburn-theme wc-mode rainbow-mode markdown-mode impatient-mode neotree highlight-parentheses flycheck auctex use-package))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

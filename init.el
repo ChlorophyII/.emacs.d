@@ -192,6 +192,11 @@
   :ensure t
   :hook ((prog-mode matlab-mode) . highlight-numbers-mode))
 
+(use-package fic-mode
+  ;; Show FIXME/TODO/BUG(...) in special face only in comments and strings
+  :ensure t
+  :hook ((prog-mode LaTeX-mode) . fic-mode))
+
 ;; =============================================================================
 
 (unless (package-installed-p 'zenburn-theme)
@@ -283,7 +288,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (fill-column-indicator magit move-text multiple-cursors zenburn-theme wc-mode rainbow-mode markdown-mode impatient-mode neotree highlight-parentheses flycheck auctex use-package))))
+    (fic-mode fill-column-indicator magit move-text multiple-cursors zenburn-theme wc-mode rainbow-mode markdown-mode impatient-mode neotree highlight-parentheses flycheck auctex use-package))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

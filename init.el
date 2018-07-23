@@ -203,6 +203,9 @@
   (package-install 'zenburn-theme))
 (load-theme 'zenburn t)
 
+(set-cursor-color "#7F9F7F") ; zenburn-green
+(setq-default cursor-type 'box) ; bar
+
 (cond ((eq system-type 'darwin)
        (set-face-attribute 'default nil :font "menlo-14")
        (setq-default line-spacing 2))
@@ -210,7 +213,6 @@
        (set-face-attribute 'default nil :font "DejaVu Sans Mono-12")
        (setq-default line-spacing 1)))
 
-(setq-default cursor-type 'box) ; bar
 
 ;; Don't let Emacs hurt your ears
 (setq visible-bell t)

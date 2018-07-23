@@ -210,7 +210,7 @@
        (set-face-attribute 'default nil :font "DejaVu Sans Mono-12")
        (setq-default line-spacing 1)))
 
-(setq-default cursor-type 'bar)
+(setq-default cursor-type 'box) ; bar
 
 ;; Don't let Emacs hurt your ears
 (setq visible-bell t)

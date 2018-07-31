@@ -170,6 +170,10 @@
   ;; Major mode for Markdown-formatted text
   :ensure t)
 
+(use-package csv-mode
+  ;; Major mode for editing comma/char separated values
+  :ensure t)
+
 (use-package wc-mode
   ;; Running word count with goals (minor mode)
   :ensure t

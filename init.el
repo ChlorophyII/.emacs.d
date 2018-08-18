@@ -216,7 +216,8 @@
       ((eq system-type 'gnu/linux)
        (set-face-attribute 'default nil :font "DejaVu Sans Mono-12")
        (setq-default line-spacing 1)))
-
+(eval-after-load "linum"
+  '(set-face-attribute 'linum nil :height 140))
 
 ;; Don't let Emacs hurt your ears
 (setq visible-bell t)

@@ -240,7 +240,7 @@
 ;; =============================================================================
 
 (defun add-hook-list (mode-hook hook-list)
-  "Add hooks in HOOK-LIST to some MODE-HOOK."
+  "Add hooks to MODE-HOOK from HOOK-LIST."
   (dolist (hook hook-list)
     (add-hook mode-hook hook)))
 
@@ -278,6 +278,13 @@
 (global-set-key (kbd "C-x <down>") 'windmove-down)
 (global-set-key (kbd "C-x <right>") 'windmove-right)
 (global-set-key (kbd "C-x <left>") 'windmove-left)
+
+;; =============================================================================
+
+(defun icloud ()
+  "Change working directory to iCloud drive."
+  (interactive)
+  (cd "~/Library/Mobile Documents/com~apple~CloudDocs"))
 
 ;; =============================================================================
 

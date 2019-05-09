@@ -65,6 +65,8 @@
 
 (defvar preview-auto-cache-preamble t)
 
+(setq TeX-PDF-mode t)
+
 (use-package latex-extra ; Adds several useful functionalities to LaTeX-mode.
   :ensure t
   :hook ((LaTeX-mode . latex-extra-mode)
@@ -272,6 +274,8 @@
 		     (lambda () (set (make-variable-buffer-local
 				      'TeX-electric-math)
 				     (cons "$" "$")))))
+(add-hook-list 'doc-view-mode-hook
+	       (list #'auto-revert-mode))
 
 (when web-development
   (add-hook-list 'web-mode-hook

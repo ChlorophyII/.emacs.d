@@ -77,6 +77,12 @@
 
 ;; =============================================================================
 
+;; Macaulay 2 start
+(load "~/.emacs-Macaulay2" t)
+;; Macaulay 2 end
+
+;; =============================================================================
+
 (unless (package-installed-p 'matlab-mode)
   (package-install 'matlab-mode))
 

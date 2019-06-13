@@ -48,6 +48,49 @@
 
 ;; =============================================================================
 
+(unless (package-installed-p 'zenburn-theme)
+  (package-install 'zenburn-theme))
+(load-theme 'zenburn t)
+
+(set-cursor-color "#7F9F7F") ; zenburn-green
+(setq-default cursor-type 'box) ; bar
+
+(cond ((eq system-type 'darwin)
+       (set-face-attribute 'default nil :font "menlo-14")
+       (setq-default line-spacing 2))
+      ((eq system-type 'gnu/linux)
+       (set-face-attribute 'default nil :font "DejaVu Sans Mono-12")
+       (setq-default line-spacing 1)))
+(eval-after-load "linum"
+  '(set-face-attribute 'linum nil :height 140))
+
+;; Don't let Emacs hurt your ears
+(setq visible-bell t)
+
+(if (display-graphic-p) ; GUI
+    (progn
+      (tool-bar-mode 0)
+      (scroll-bar-mode 0)))
+
+(menu-bar-mode 0)
+
+;; Merge the fringe with background
+(set-face-attribute 'fringe nil
+		    :foreground (face-foreground 'default)
+		    :background (face-background 'default))
+
+;; Don't use messages that you don't read
+(setq initial-scratch-message "")
+(setq inhibit-startup-message t)
+(defun display-startup-echo-area-message ()
+  "Appear in the echo area when starting Emacs."
+  (message "Emacs Rocks!"))
+
+;; Wrap lines in org-mode
+(defvar org-startup-truncated nil)
+
+;; =============================================================================
+
 ;; Warning: Don't touch the code below
 ;; AUCTeX will not function even a single character is missed
 
@@ -208,49 +251,6 @@
   ;; Show FIXME/TODO/BUG(...) in special face only in comments and strings
   :ensure t
   :hook ((prog-mode LaTeX-mode) . fic-mode))
-
-;; =============================================================================
-
-(unless (package-installed-p 'zenburn-theme)
-  (package-install 'zenburn-theme))
-(load-theme 'zenburn t)
-
-(set-cursor-color "#7F9F7F") ; zenburn-green
-(setq-default cursor-type 'box) ; bar
-
-(cond ((eq system-type 'darwin)
-       (set-face-attribute 'default nil :font "menlo-14")
-       (setq-default line-spacing 2))
-      ((eq system-type 'gnu/linux)
-       (set-face-attribute 'default nil :font "DejaVu Sans Mono-12")
-       (setq-default line-spacing 1)))
-(eval-after-load "linum"
-  '(set-face-attribute 'linum nil :height 140))
-
-;; Don't let Emacs hurt your ears
-(setq visible-bell t)
-
-(if (display-graphic-p) ; GUI
-    (progn
-      (tool-bar-mode 0)
-      (scroll-bar-mode 0)))
-
-(menu-bar-mode 0)
-
-;; Merge the fringe with background
-(set-face-attribute 'fringe nil
-		    :foreground (face-foreground 'default)
-		    :background (face-background 'default))
-
-;; Don't use messages that you don't read
-(setq initial-scratch-message "")
-(setq inhibit-startup-message t)
-(defun display-startup-echo-area-message ()
-  "Appear in the echo area when starting Emacs."
-  (message "Emacs Rocks!"))
-
-;; Wrap lines in org-mode
-(defvar org-startup-truncated nil)
 
 ;; =============================================================================
 

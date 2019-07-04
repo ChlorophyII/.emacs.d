@@ -79,6 +79,13 @@
 		    :foreground (face-foreground 'default)
 		    :background (face-background 'default))
 
+(setf (cdr (assq 'continuation fringe-indicator-alist))
+				   ;; '(nil nil) ;; no continuation indicators
+				   '(nil right-curly-arrow) ;; right indicator only
+				   ;; '(left-curly-arrow nil) ;; left indicator only
+				   ;; '(left-curly-arrow right-curly-arrow) ;; default
+				   )
+
 ;; Don't use messages that you don't read
 (setq initial-scratch-message "")
 (setq inhibit-startup-message t)

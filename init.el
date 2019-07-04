@@ -149,7 +149,12 @@
   (use-package impatient-mode
     ;; Serve buffers live over HTTP
     :ensure t
-    :hook ((web-mode css-mode) . impatient-mode)))
+    :hook ((web-mode css-mode) . impatient-mode))
+
+  (use-package rainbow-mode
+    ;; Colorize color names in buffers
+    :ensure t
+    :hook css-mode))
 
 (use-package flycheck
   ;; On-the-fly syntax checking
@@ -231,11 +236,6 @@
   :hook text-mode
   :config
   (setq wc-modeline-format "WC[%w %tw %tc]"))
-
-(use-package rainbow-mode
-  ;; Colorize color names in buffers
-  :ensure t
-  :hook css-mode)
 
 (use-package highlight-parentheses
   ;; Highlight surrounding parentheses

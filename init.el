@@ -237,6 +237,16 @@
   :config
   (setq wc-modeline-format "WC[%w %tw %tc]"))
 
+(use-package writeroom-mode
+  ;; Minor mode for distraction-free writing
+  :ensure t
+  :hook ((writeroom-mode . (lambda ()
+			     (writeroom-adjust-width
+			      (truncate (- (* 0.52 (/ (display-pixel-width)
+						     (frame-char-width)))
+					   visual-fill-column-width)))))
+	 (writeroom-mode . (lambda () (fci-mode 0)))))
+
 (use-package highlight-parentheses
   ;; Highlight surrounding parentheses
   :ensure t
@@ -312,7 +322,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (fic-mode fill-column-indicator magit move-text multiple-cursors zenburn-theme wc-mode rainbow-mode markdown-mode impatient-mode neotree highlight-parentheses flycheck auctex use-package))))
+    (writeroom-mode fic-mode fill-column-indicator magit move-text multiple-cursors zenburn-theme wc-mode rainbow-mode markdown-mode impatient-mode neotree highlight-parentheses flycheck auctex use-package))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

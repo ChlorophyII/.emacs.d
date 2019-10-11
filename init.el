@@ -109,7 +109,7 @@
 (defvar TeX-electric-math t)
 ;; To use AUCTeX preview, gs is needed
 (cond ((eq system-type 'darwin)
-       (defvar preview-gs-command "/usr/local/bin/gs"))
+       (setq preview-gs-command "/usr/local/bin/gs"))
       ((eq system-type 'gnu/linux)
        (setq preview-gs-command "/usr/bin/gs")))
 

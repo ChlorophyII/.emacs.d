@@ -253,7 +253,12 @@
 			      (truncate (- (* 0.52 (/ (display-pixel-width)
 						     (frame-char-width)))
 					   visual-fill-column-width)))))
-	 (writeroom-mode . (lambda () (fci-mode 0)))))
+	 (writeroom-mode . (lambda () (fci-mode 0)))
+	 (writeroom-mode . (lambda ()
+			     (setf (cdr (assq 'continuation
+					      fringe-indicator-alist))
+				   '(nil nil) ;; no continuation indicators
+				   )))))
 
 (use-package highlight-parentheses
   ;; Highlight surrounding parentheses

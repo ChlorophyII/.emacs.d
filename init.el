@@ -28,6 +28,8 @@
 ;; ChezScheme is ChlorophyII's default option
 (defvar scheme-program-name "chez")
 
+(defvar python-shell-completion-native-enable nil)
+
 ;; =============================================================================
 
 ;; Notice the slash after "texbin"

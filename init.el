@@ -28,7 +28,7 @@
 ;; ChezScheme is ChlorophyII's default option
 (defvar scheme-program-name "chez")
 
-(defvar python-shell-completion-native-enable nil)
+(defvar python-shell-interpreter "python3")
 
 ;; =============================================================================
 

@@ -216,9 +216,18 @@
   :config
   (move-text-default-bindings))
 
+(use-package all-the-icons
+  ;; A library for inserting Developer icons
+  :ensure t
+  :config
+  (unless (package-installed-p 'all-the-icons)
+    (all-the-icons-install-fonts)))
+
 (use-package neotree
   ;; A tree plugin like NerdTree for Vim
-  :ensure t)
+  :ensure t
+  :config
+  (setq neo-theme 'icons))
 
 (use-package fill-column-indicator
   ;; Graphically indicate the fill column
@@ -337,7 +346,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (writeroom-mode fic-mode fill-column-indicator magit move-text multiple-cursors zenburn-theme wc-mode rainbow-mode markdown-mode impatient-mode neotree highlight-parentheses flycheck auctex use-package))))
+    (all-the-icons ebib writeroom-mode fic-mode fill-column-indicator magit move-text multiple-cursors zenburn-theme wc-mode rainbow-mode markdown-mode impatient-mode neotree highlight-parentheses flycheck auctex use-package))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

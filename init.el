@@ -221,7 +221,7 @@
   :ensure t
   :config
   (unless (package-installed-p 'all-the-icons)
-    (all-the-icons-install-fonts)))
+    (all-the-icons-install-fonts "yes")))
 
 (use-package neotree
   ;; A tree plugin like NerdTree for Vim

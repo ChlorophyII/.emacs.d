@@ -249,6 +249,13 @@
   ;; Major mode for editing comma/char separated values
   :ensure t)
 
+(use-package pyvenv
+  ;; Python virtual environment interface
+  :ensure t
+  :hook (python-mode . pyvenv-mode)
+  :config
+  (setenv "WORKON_HOME" "~/"))
+
 (use-package wc-mode
   ;; Running word count with goals (minor mode)
   :ensure t
@@ -345,8 +352,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   (quote
-    (all-the-icons ebib writeroom-mode fic-mode fill-column-indicator magit move-text multiple-cursors zenburn-theme wc-mode rainbow-mode markdown-mode impatient-mode neotree highlight-parentheses flycheck auctex use-package))))
+   '(pyvenv all-the-icons ebib writeroom-mode fic-mode fill-column-indicator magit move-text multiple-cursors zenburn-theme wc-mode rainbow-mode markdown-mode impatient-mode neotree highlight-parentheses flycheck auctex use-package)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

@@ -118,6 +118,11 @@
 
 (defvar preview-auto-cache-preamble t)
 
+(eval-after-load "latex"
+  '(add-to-list 'LaTeX-verbatim-macros-with-braces "hphantom"))
+(eval-after-load "latex"
+  '(add-to-list 'LaTeX-verbatim-macros-with-braces "vphantom"))
+
 (setq TeX-PDF-mode t)
 
 (use-package latex-extra ; Adds several useful functionalities to LaTeX-mode.

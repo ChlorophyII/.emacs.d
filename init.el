@@ -178,12 +178,10 @@
 (use-package smartparens
   ;; Automatic insertion, wrapping and paredit-like navigation with user defined pairs.
   :ensure t
-  :hook (((prog-mode text-mode) . smartparens-mode)
-	 (LaTeX-mode . (lambda () (require 'smartparens-latex)))
-	 (markdown-mode . (lambda () (require 'smartparens-markdown))))
+  :hook ((prog-mode text-mode) . smartparens-mode)
   :config
-  (sp-local-pair 'org-mode "$" "$")
-)
+  (require 'smartparens-config)
+  (sp-local-pair 'org-mode "$" "$"))
 
 (use-package all-the-icons
   ;; A library for inserting Developer icons

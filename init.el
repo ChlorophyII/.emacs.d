@@ -104,8 +104,6 @@
   (package-install 'auctex))
 (require 'tex)
 
-(defvar LaTeX-electric-left-right-brace t)
-(defvar TeX-electric-math t)
 ;; To use AUCTeX preview, gs is needed
 (cond ((eq system-type 'darwin)
        (setq preview-gs-command "/usr/local/bin/gs"))
@@ -176,6 +174,16 @@
   :ensure t
   :config
   (move-text-default-bindings))
+
+(use-package smartparens
+  ;; Automatic insertion, wrapping and paredit-like navigation with user defined pairs.
+  :ensure t
+  :hook (((prog-mode text-mode) . smartparens-mode)
+	 (LaTeX-mode . (lambda () (require 'smartparens-latex)))
+	 (markdown-mode . (lambda () (require 'smartparens-markdown))))
+  :config
+  (sp-local-pair 'org-mode "$" "$")
+)
 
 (use-package all-the-icons
   ;; A library for inserting Developer icons
@@ -271,14 +279,10 @@
 
 (add-hook-list 'prog-mode-hook
 	       (list #'linum-mode
-		     #'electric-pair-mode
 		     #'my-hs-minor-mode-hook))
 
 (add-hook-list 'LaTeX-mode-hook
-	       (list #'linum-mode
-		     (lambda () (set (make-variable-buffer-local
-				      'TeX-electric-math)
-				     (cons "$" "$")))))
+	       (list #'linum-mode))
 (add-hook-list 'doc-view-mode-hook
 	       (list #'auto-revert-mode))
 

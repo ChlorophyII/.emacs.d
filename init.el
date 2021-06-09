@@ -140,9 +140,6 @@
 
 ;; =============================================================================
 
-(unless (package-installed-p 'matlab-mode)
-  (package-install 'matlab-mode))
-
 (when web-development
   (use-package web-mode
     ;; Major mode for editing web templates
@@ -290,7 +287,7 @@
 (use-package highlight-numbers
   ;; Highlight numbers in source code
   :ensure t
-  :hook ((prog-mode matlab-mode) . highlight-numbers-mode))
+  :hook ((prog-mode) . highlight-numbers-mode))
 
 (use-package fic-mode
   ;; Show FIXME/TODO/BUG(...) in special face only in comments and strings
@@ -316,9 +313,6 @@
 	       (list #'linum-mode
 		     #'electric-pair-mode
 		     #'my-hs-minor-mode-hook))
-
-(add-hook-list 'matlab-mode-hook
-	       (list #'linum-mode))
 
 (add-hook-list 'LaTeX-mode-hook
 	       (list #'linum-mode

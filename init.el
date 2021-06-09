@@ -21,9 +21,6 @@
 ;; To autoload bash init file
 (shell-command "source ~/.bashrc")
 
-;; To enable or disable web development packages
-(defvar web-development nil)
-
 ;; ChezScheme is ChlorophyII's default option
 (defvar scheme-program-name "chez")
 
@@ -140,33 +137,6 @@
 
 ;; =============================================================================
 
-(when web-development
-  (use-package web-mode
-    ;; Major mode for editing web templates
-    :ensure t
-    :config
-    (add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
-    (add-to-list 'auto-mode-alist '("\\.php\\'" . web-mode))
-    (add-to-list 'auto-mode-alist '("\\.js\\'" . web-mode)))
-
-  (use-package sql-indent
-    ;; Indentation of SQL statements
-    :ensure t
-    :config
-    (with-eval-after-load "sql"
-      (load-library "sql-indent"))
-    (defvar sql-indent-offset 2))
-
-  (use-package impatient-mode
-    ;; Serve buffers live over HTTP
-    :ensure t
-    :hook ((web-mode css-mode) . impatient-mode))
-
-  (use-package rainbow-mode
-    ;; Colorize color names in buffers
-    :ensure t
-    :hook css-mode))
-
 (use-package flycheck
   ;; On-the-fly syntax checking
   :ensure t
@@ -201,15 +171,6 @@
 			    (add-to-list (make-local-variable 'company-backends)
 					 '(company-math-symbols-latex
 					   company-latex-commands))))))
-
-(use-package multiple-cursors
-  ;; Multiple cursors for Emacs
-  :ensure t
-  :hook ((prog-mode web-mode) . multiple-cursors-mode)
-  :config
-  (global-set-key (kbd "C-S-n") 'mc/mark-next-like-this)
-  (global-set-key (kbd "C-S-p") 'mc/mark-previous-like-thismc)
-  (global-set-key (kbd "C-c C-S-n") 'mc/mark-all-like-this))
 
 (use-package move-text
   ;; Move current line or region with M-up or M-down.
@@ -287,7 +248,7 @@
 (use-package highlight-numbers
   ;; Highlight numbers in source code
   :ensure t
-  :hook ((prog-mode) . highlight-numbers-mode))
+  :hook (prog-mode . highlight-numbers-mode))
 
 (use-package fic-mode
   ;; Show FIXME/TODO/BUG(...) in special face only in comments and strings
@@ -321,12 +282,6 @@
 				     (cons "$" "$")))))
 (add-hook-list 'doc-view-mode-hook
 	       (list #'auto-revert-mode))
-
-(when web-development
-  (add-hook-list 'web-mode-hook
-		 (list #'httpd-start))
-  (add-hook-list 'css-mode-hook
-		 (list #'httpd-start)))
 
 ;; =============================================================================
 

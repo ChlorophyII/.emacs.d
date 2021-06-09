@@ -60,8 +60,8 @@
       ((eq system-type 'gnu/linux)
        (set-face-attribute 'default nil :font "DejaVu Sans Mono-12")
        (setq-default line-spacing 1)))
-(eval-after-load "linum"
-  '(set-face-attribute 'linum nil :height 140))
+(with-eval-after-load "linum"
+  (set-face-attribute 'linum nil :height 140))
 
 ;; Don't let Emacs hurt your ears
 (setq visible-bell t)
@@ -114,10 +114,9 @@
 
 (defvar preview-auto-cache-preamble t)
 
-(eval-after-load "latex"
-  '(add-to-list 'LaTeX-verbatim-macros-with-braces "hphantom"))
-(eval-after-load "latex"
-  '(add-to-list 'LaTeX-verbatim-macros-with-braces "vphantom"))
+(with-eval-after-load "latex"
+  (add-to-list 'LaTeX-verbatim-macros-with-braces "hphantom")
+  (add-to-list 'LaTeX-verbatim-macros-with-braces "vphantom"))
 
 (setq TeX-PDF-mode t)
 

@@ -26,6 +26,12 @@
 
 ;; =============================================================================
 
+; Solve path-related problem
+(setenv "PATH" (concat "/usr/local/bin:" "/usr/local/sbin:" (getenv "PATH")))
+(setq exec-path (split-string (getenv "PATH") path-separator))
+
+;; =============================================================================
+
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
@@ -87,18 +93,16 @@
   :ensure auctex
   :defer t
   :config
+  ;; Notice the slash after "texbin"
+  (setenv "PATH" (concat "/Library/TeX/texbin/:" (getenv "PATH")))
+  (setq exec-path (split-string (getenv "PATH") path-separator))
+
   ;; To use AUCTeX preview, gs is needed
   (cond ((eq system-type 'darwin)
 	 (setq preview-gs-command "/usr/local/bin/gs"))
 	((eq system-type 'gnu/linux)
 	 (setq preview-gs-command "/usr/bin/gs")))
-  ;; Notice the slash after "texbin"
-  (setenv "PATH" (concat
-		  "/usr/local/bin:"
-		  "/usr/local/sbin:"
-		  "/Library/TeX/texbin/:"
-		  (getenv "PATH")))
-  (setq exec-path (split-string (getenv "PATH") path-separator))
+
   (defvar preview-auto-cache-preamble t)
   (with-eval-after-load "latex"
     (add-to-list 'LaTeX-verbatim-macros-with-braces "hphantom")

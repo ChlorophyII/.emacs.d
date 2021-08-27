@@ -278,12 +278,46 @@
   (local-set-key (kbd "C-=") 'hs-show-block)
   (local-set-key (kbd "C--") 'hs-hide-block))
 
+(defun my-LaTeX-keybindings-hook ()
+  "Add keybindings for autobrackets and insert braces after ^ and _."
+  (local-set-key (kbd "C-c a") (lambda () (interactive)
+				 (progn (insert "\\abra{}")
+					(backward-char))))
+  (local-set-key (kbd "C-c c") (lambda () (interactive)
+				 (progn (insert "\\abrc{}")
+					(backward-char))))
+  (local-set-key (kbd "C-c r") (lambda () (interactive)
+				 (progn (insert "\\abrr{}")
+					(backward-char))))
+  (local-set-key (kbd "C-c s") (lambda () (interactive)
+				 (progn (insert "\\abrs{}")
+					(backward-char))))
+  (local-set-key (kbd "^") (lambda () (interactive)
+			     (progn (insert "^{}")
+				    (backward-char))))
+  (local-set-key (kbd "_") (lambda () (interactive)
+			     (progn (insert "_{}")
+				    (backward-char)))))
+
+(defun my-org-smartparens-setting-hook ()
+  "Remove unnecessary pairs."
+  (sp-local-pair 'org-mode "*" nil :actions :rem)
+  (sp-local-pair 'org-mode "_" nil :actions :rem)
+  (sp-local-pair 'org-mode "=" nil :actions :rem)
+  (sp-local-pair 'org-mode "~" nil :actions :rem)
+  (sp-local-pair 'org-mode "/" nil :actions :rem))
+
 (add-hook-list 'prog-mode-hook
 	       (list #'linum-mode
 		     #'my-hs-minor-mode-hook))
 
 (add-hook-list 'LaTeX-mode-hook
-	       (list #'linum-mode))
+	       (list #'linum-mode
+		     #'my-LaTeX-keybindings-hook))
+(add-hook-list 'org-mode-hook
+	       (list #'my-LaTeX-keybindings-hook
+		     #'my-org-smartparens-setting-hook))
+
 (add-hook-list 'doc-view-mode-hook
 	       (list #'auto-revert-mode))
 
@@ -324,7 +358,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(pyvenv all-the-icons ebib writeroom-mode fic-mode fill-column-indicator magit move-text multiple-cursors zenburn-theme wc-mode rainbow-mode markdown-mode impatient-mode neotree highlight-parentheses flycheck auctex use-package)))
+   '(graphviz-dot-mode pyvenv all-the-icons ebib writeroom-mode fic-mode fill-column-indicator magit move-text multiple-cursors zenburn-theme wc-mode rainbow-mode markdown-mode impatient-mode neotree highlight-parentheses flycheck auctex use-package)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

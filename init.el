@@ -308,6 +308,18 @@
   (sp-local-pair 'org-mode "~" nil :actions :rem)
   (sp-local-pair 'org-mode "/" nil :actions :rem))
 
+(defun my-org-keybindings-hook ()
+  "Add keybindings to `org-mode'."
+  (local-set-key (kbd "C-c e")
+		 (lambda () (interactive)
+		   (progn (indent-for-tab-command)
+			  (insert "#+BEGIN_EXPORT latex")
+			  (newline-and-indent 2)
+			  (insert "#+END_EXPORT")
+			  (forward-line -1)
+			  (indent-for-tab-command)
+			  (org-edit-export-block)))))
+
 (add-hook-list 'prog-mode-hook
 	       (list #'linum-mode
 		     #'my-hs-minor-mode-hook))
@@ -317,7 +329,8 @@
 		     #'my-LaTeX-keybindings-hook))
 (add-hook-list 'org-mode-hook
 	       (list #'my-LaTeX-keybindings-hook
-		     #'my-org-smartparens-setting-hook))
+		     #'my-org-smartparens-setting-hook
+		     #'my-org-keybindings-hook))
 
 (add-hook-list 'doc-view-mode-hook
 	       (list #'auto-revert-mode))

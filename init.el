@@ -169,7 +169,8 @@
   :hook ((prog-mode text-mode) . smartparens-mode)
   :config
   (require 'smartparens-config)
-  (sp-local-pair 'org-mode "$" "$"))
+  (sp-local-pair 'org-mode "$" "$")
+  (sp-local-pair 'org-mode "\\[" "\\]"))
 
 (use-package move-text
   ;; Move current line or region with M-up or M-down.

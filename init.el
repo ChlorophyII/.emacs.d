@@ -320,6 +320,19 @@
 			  (indent-for-tab-command)
 			  (org-edit-export-block)))))
 
+(defun my-org-deeper-subsection-class-hook ()
+  "Add an extra level of subsection when exporting org to LaTeX."
+  (with-eval-after-load 'ox-latex
+    (add-to-list 'org-latex-classes
+               '("article-deeper-subsections"
+		 "\\documentclass{article}"
+		 ("\\section{%s}" . "\\section*{%s}")
+		 ("\\subsection{%s}" . "\\subsection*{%s}")
+		 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+		 ("\\subsubsubsection{%s}" . "\\subsubsubsection*{%s}")
+		 ("\\paragraph{%s}" . "\\paragraph*{%s}")
+		 ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))))
+
 (add-hook-list 'prog-mode-hook
 	       (list #'linum-mode
 		     #'my-hs-minor-mode-hook))
@@ -330,7 +343,8 @@
 (add-hook-list 'org-mode-hook
 	       (list #'my-LaTeX-keybindings-hook
 		     #'my-org-smartparens-setting-hook
-		     #'my-org-keybindings-hook))
+		     #'my-org-keybindings-hook
+		     #'my-org-deeper-subsection-class-hook))
 
 (add-hook-list 'doc-view-mode-hook
 	       (list #'auto-revert-mode))

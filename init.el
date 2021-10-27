@@ -26,8 +26,12 @@
 
 ;; =============================================================================
 
-; Solve path-related problem
-(setenv "PATH" (concat "/usr/local/bin:" "/usr/local/sbin:" (getenv "PATH")))
+; Solve path-related problems
+
+(if (string= (shell-command-to-string "uname -m") "arm64\n")
+    (setenv "PATH" (concat "/opt/homebrew/bin:" (getenv "PATH")))
+  (setenv "PATH" (concat "/usr/local/bin:" "/usr/local/sbin:" (getenv "PATH"))))
+
 (setq exec-path (split-string (getenv "PATH") path-separator))
 
 ;; =============================================================================
@@ -99,7 +103,9 @@
 
   ;; To use AUCTeX preview, gs is needed
   (cond ((eq system-type 'darwin)
-	 (setq preview-gs-command "/usr/local/bin/gs"))
+	 (if (string= (shell-command-to-string "uname -m") "arm64\n")
+	     (setq preview-gs-command "/opt/homebrew/bin/gs")
+	   (setq preview-gs-command "/usr/local/bin/gs")))
 	((eq system-type 'gnu/linux)
 	 (setq preview-gs-command "/usr/bin/gs")))
 

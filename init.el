@@ -339,6 +339,20 @@
 		 ("\\paragraph{%s}" . "\\paragraph*{%s}")
 		 ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))))
 
+(defun my-org-report-paragraph-class-hook ()
+  "Use paragraph in report when exporting org to LaTeX."
+  (with-eval-after-load 'ox-latex
+    (add-to-list 'org-latex-classes
+               '("report-paragraph"
+		 "\\documentclass{report}"
+		 ("\\part{%s}" . "\\part*{%s}")
+		 ("\\chapter{%s}" . "\\chapter*{%s}")
+		 ("\\section{%s}" . "\\section*{%s}")
+		 ("\\subsection{%s}" . "\\subsection*{%s}")
+		 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+		 ("\\paragraph{%s}" . "\\paragraph*{%s}")
+		 ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))))
+
 (add-hook-list 'prog-mode-hook
 	       (list #'linum-mode
 		     #'my-hs-minor-mode-hook))
@@ -350,7 +364,8 @@
 	       (list #'my-LaTeX-keybindings-hook
 		     #'my-org-smartparens-setting-hook
 		     #'my-org-keybindings-hook
-		     #'my-org-deeper-subsection-class-hook))
+		     #'my-org-deeper-subsection-class-hook
+		     #'my-org-report-paragraph-class-hook))
 
 (add-hook-list 'doc-view-mode-hook
 	       (list #'auto-revert-mode))

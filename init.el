@@ -380,7 +380,7 @@
 ;; =============================================================================
 
 ;; ChezScheme is ChlorophyII's default option
-(defvar scheme-program-name "chez")
+;; (defvar scheme-program-name "chez")
 
 (defvar python-shell-interpreter "python3")
 

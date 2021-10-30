@@ -27,10 +27,9 @@
 ;; =============================================================================
 
 ; Solve path-related problems
-
 (if (string= (shell-command-to-string "uname -m") "arm64\n")
-    (setenv "PATH" (concat "/opt/homebrew/bin:" (getenv "PATH")))
-  (setenv "PATH" (concat "/usr/local/bin:" "/usr/local/sbin:" (getenv "PATH"))))
+    (setenv "PATH" (concat "/opt/homebrew/bin:" (getenv "PATH"))))
+(setenv "PATH" (concat "/usr/local/bin:" "/usr/local/sbin:" (getenv "PATH")))
 
 (setq exec-path (split-string (getenv "PATH") path-separator))
 
@@ -380,7 +379,7 @@
 ;; =============================================================================
 
 ;; ChezScheme is ChlorophyII's default option
-;; (defvar scheme-program-name "chez")
+(defvar scheme-program-name "scheme")
 
 (defvar python-shell-interpreter "python3")
 

@@ -108,6 +108,8 @@
 	((eq system-type 'gnu/linux)
 	 (setq preview-gs-command "/usr/bin/gs")))
 
+  (set-default 'preview-scale-function 1)
+
   (defvar preview-auto-cache-preamble t)
   (with-eval-after-load "latex"
     (add-to-list 'LaTeX-verbatim-macros-with-braces "hphantom")

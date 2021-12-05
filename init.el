@@ -26,18 +26,18 @@
 
 ;; =============================================================================
 
-; Solve path-related problems
-(if (string= (shell-command-to-string "uname -m") "arm64\n")
-    (setenv "PATH" (concat "/opt/homebrew/bin:" (getenv "PATH"))))
-(setenv "PATH" (concat "/usr/local/bin:" "/usr/local/sbin:" (getenv "PATH")))
-
-(setq exec-path (split-string (getenv "PATH") path-separator))
-
-;; =============================================================================
-
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
+
+;; =============================================================================
+
+; To solve path-related problems
+(use-package exec-path-from-shell
+  ;; Get environment variables such as $PATH from the shell
+  :ensure t
+  :config (when (memq window-system '(mac ns x))
+	    (exec-path-from-shell-initialize)))
 
 ;; =============================================================================
 
@@ -96,17 +96,6 @@
   :ensure auctex
   :defer t
   :config
-  ;; Notice the slash after "texbin"
-  (setenv "PATH" (concat "/Library/TeX/texbin/:" (getenv "PATH")))
-  (setq exec-path (split-string (getenv "PATH") path-separator))
-
-  ;; To use AUCTeX preview, gs is needed
-  (cond ((eq system-type 'darwin)
-	 (if (string= (shell-command-to-string "uname -m") "arm64\n")
-	     (setq preview-gs-command "/opt/homebrew/bin/gs")
-	   (setq preview-gs-command "/usr/local/bin/gs")))
-	((eq system-type 'gnu/linux)
-	 (setq preview-gs-command "/usr/bin/gs")))
 
   (set-default 'preview-scale-function 1)
 

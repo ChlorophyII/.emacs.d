@@ -89,6 +89,9 @@
 ;; Wrap lines in org-mode
 (defvar org-startup-truncated nil)
 
+;; Adaptively indent text in org-mode
+(defvar org-adapt-indentation t)
+
 ;; =============================================================================
 
 (use-package tex

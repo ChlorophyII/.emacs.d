@@ -100,7 +100,7 @@
   :defer t
   :config
 
-  (set-default 'preview-scale-function 1)
+  (set-default 'preview-scale-function 1.2)
 
   (defvar preview-auto-cache-preamble t)
   (with-eval-after-load "latex"

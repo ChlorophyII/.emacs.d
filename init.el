@@ -187,6 +187,11 @@
   :ensure t
   :defer t)
 
+(use-package racket-mode
+  ;; Racket editing, REPL, and more
+  :ensure t
+  :defer t)
+
 (use-package csv-mode
   ;; Major mode for editing comma/char separated values
   :ensure t

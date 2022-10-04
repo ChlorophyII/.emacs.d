@@ -128,6 +128,8 @@
 (use-package flycheck
   ;; On-the-fly syntax checking
   :ensure t
+  :hook
+  (c++-mode . (lambda () (setq flycheck-clang-language-standard "c++11")))
   :config
   (global-flycheck-mode t))
 

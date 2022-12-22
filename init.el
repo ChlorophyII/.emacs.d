@@ -164,6 +164,12 @@
 					 '(company-math-symbols-latex
 					   company-latex-commands))))))
 
+(use-package jedi
+  ;; a Python auto-completion for Emacs
+  :ensure t
+  :hook (python-mode . jedi:setup)
+  )
+
 (use-package smartparens
   ;; Automatic insertion, wrapping and paredit-like navigation with user defined pairs.
   :ensure t

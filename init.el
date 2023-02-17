@@ -413,6 +413,11 @@
   (interactive)
   (cd "~/Library/Mobile Documents/com~apple~CloudDocs"))
 
+(defun beorg ()
+  "Change working directory to iCloud drive."
+  (interactive)
+  (cd "~/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org"))
+
 ;; =============================================================================
 
 (run-with-idle-timer

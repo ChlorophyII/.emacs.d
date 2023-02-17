@@ -223,14 +223,11 @@
   ;; A tree plugin like NerdTree for Vim
   :ensure t
   :config
-  (setq neo-theme 'icons))
-
-(use-package all-the-icons
-  ;; A library for inserting Developer icons
-  :ensure t
-  :config
-  (unless (package-installed-p 'all-the-icons)
-    (all-the-icons-install-fonts "yes")))
+  (when (display-graphic-p)
+    (unless (package-installed-p 'all-the-icons)
+      (package-install 'all-the-icons)
+      (all-the-icons-install-fonts "yes"))
+    (setq neo-theme 'icons)))
 
 (use-package fill-column-indicator
   ;; Graphically indicate the fill column

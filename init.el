@@ -198,7 +198,13 @@
 (use-package racket-mode
   ;; Racket editing, REPL, and more
   :ensure t
-  :defer t)
+  :defer t
+  :bind (:map racket-mode-map
+	      ("C-c C-e" . racket-eval-last-sexp))
+  :config
+  (set-input-method "greek")
+  (toggle-input-method))
+
 
 (use-package csv-mode
   ;; Major mode for editing comma/char separated values

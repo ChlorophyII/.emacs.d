@@ -404,7 +404,17 @@
 ;; ChezScheme is ChlorophyII's default option
 (defvar scheme-program-name "scheme")
 
-(defvar python-shell-interpreter "python3")
+;; Whether using python or ipython:
+;; 1. Install pyenv with homebrew
+;; 2. Install python with pyenv
+;; 3. Install ipython with the pip3 associated to python installed with pyenv
+;; This is to avoid the annoying __PYTHON_EL_eval_file(...)
+;; See https://emacs.stackexchange.com/a/77313/14578
+
+;; (setq python-shell-interpreter "python3"
+;;       python-shell-interpreter-args "-i")
+(setq python-shell-interpreter "ipython"
+      python-shell-interpreter-args "-i --simple-prompt")
 
 ;; Macaulay 2
 (load "~/.emacs-Macaulay2" t)

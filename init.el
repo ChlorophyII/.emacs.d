@@ -376,11 +376,11 @@
 		 ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))))
 
 (add-hook-list 'prog-mode-hook
-	       (list #'linum-mode
+	       (list #'display-line-numbers-mode
 		     #'my-hs-minor-mode-hook))
 
 (add-hook-list 'LaTeX-mode-hook
-	       (list #'linum-mode
+	       (list #'display-line-numbers-mode
 		     #'my-LaTeX-keybindings-hook))
 (add-hook-list 'org-mode-hook
 	       (list #'my-LaTeX-keybindings-hook

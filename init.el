@@ -304,6 +304,25 @@
    										  completion-in-region-function))))
   :config (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter))
 
+(use-package eglot
+  ;; The Emacs Client for LSP servers
+  :hook ((python-mode c++-mode LaTeX-mode) . eglot-ensure)
+  :config (add-to-list 'eglot-server-programs '(LaTeX-mode . ("texlab"))))
+
+(use-package company
+  ;; Modular text completion framework
+  :ensure t)
+
+(use-package yasnippet
+  ;; Yet another snippet extension for Emacs
+  :ensure t
+  :hook ((prog-mode LaTeX-mode shell-mode) . yas-minor-mode))
+
+(use-package yasnippet-snippets
+  ;;Collection of yasnippet snippets
+  :after yasnippet
+  :ensure t)
+
 (use-package cape
   ;; Completion At Point Extensions
   :ensure t
@@ -313,8 +332,9 @@
 											(list (cape-capf-super
 												   #'eglot-completion-at-point
 												   #'cape-dabbrev
-												   #'cape-keyword
-												   #'cape-file)
+												   #'cape-keyword)
+												  (cape-company-to-capf #'company-yasnippet)
+												  #'cape-file
 												  t))))
   :init
   ;; Add to the global default value of `completion-at-point-functions' which is
@@ -329,31 +349,6 @@
   (add-to-list 'completion-at-point-functions #'cape-dabbrev)
   (add-to-list 'completion-at-point-functions #'cape-keyword)
   (add-to-list 'completion-at-point-functions #'cape-history))
-
-(use-package eglot
-  ;; The Emacs Client for LSP servers
-  :hook ((python-mode c++-mode LaTeX-mode) . eglot-ensure)
-  :config (add-to-list 'eglot-server-programs '(LaTeX-mode . ("texlab"))))
-
-(use-package company
-  ;; Modular text completion framework
-  :ensure t)
-
-(use-package yasnippet
-  ;; Yet another snippet extension for Emacs
-  :ensure t
-  :hook (((prog-mode LaTeX-mode shell-mode) . yas-minor-mode)
-		 (eglot-managed-mode
-		  . (lambda ()
-			  (setq-local completion-at-point-functions
-						  (list (cape-capf-super
-								 #'eglot-completion-at-point
-								 (cape-company-to-capf #'company-yasnippet))
-								t))))))
-(use-package yasnippet-snippets
-  ;;Collection of yasnippet snippets
-  :after yasnippet
-  :ensure t)
 
 ;; =============================================================================
 

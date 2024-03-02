@@ -206,11 +206,13 @@
   :ensure auctex
   :custom ((TeX-PDF-mode t)
 		   (preview-scale-function 1.2)
-		   (preview-auto-cache-preamble t))
-  :hook (LaTeX-mode . (lambda ()
-						(setq-local completion-at-point-functions
-									(append '(cape-tex)
-											completion-at-point-functions))))
+		   (preview-auto-cache-preamble t)
+		   (TeX-source-correlate-method 'synctex))
+  :hook ((LaTeX-mode . TeX-source-correlate-mode)
+		 (LaTeX-mode . (lambda ()
+						 (setq-local completion-at-point-functions
+									 (append '(cape-tex)
+											 completion-at-point-functions)))))
   :config
   (with-eval-after-load "latex"
     (add-to-list 'LaTeX-verbatim-macros-with-braces "hphantom")

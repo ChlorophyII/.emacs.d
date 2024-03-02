@@ -166,12 +166,14 @@
   ;; Minor mode for distraction-free writing
   :ensure t
   :defer t
-  :hook (writeroom-mode-hook . (lambda () (fci-mode 0)))
+  :hook (writeroom-mode . (lambda ()
+							(fci-mode 0)
+							(writeroom-adjust-width
+							 (truncate (- (max 80
+											   (* 0.52 (/ (display-pixel-width)
+														 (frame-char-width))))
+										  writeroom-width)))))
   :config
-  (writeroom-adjust-width
-   (truncate (- (* 0.52 (/ (display-pixel-width)
-						   (frame-char-width)))
-				visual-fill-column-width)))
   (setf (cdr (assq 'continuation fringe-indicator-alist))
 		'(nil nil))) ;; no continuation indicators
 

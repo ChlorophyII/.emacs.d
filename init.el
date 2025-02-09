@@ -285,6 +285,14 @@
   ;; Major mode for editing comma/char separated values
   :ensure t :defer t)
 
+(use-package rust-mode
+  :ensure t
+  :hook (rust-mode . eglot-ensure)
+  :config (add-to-list 'eglot-server-programs
+					   '((rust-ts-mode rust-mode) .
+						 ("rust-analyzer" :initializationOptions
+                          (:check (:command "clippy"))))))
+
 ;; =============================================================================
 
 (use-package corfu
@@ -376,7 +384,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(zenburn-theme yasnippet-snippets writeroom-mode wc-mode vertico smartparens pdf-tools neotree move-text markdown-mode marginalia magit kind-icon hl-todo highlight-numbers fill-column-indicator exec-path-from-shell esup diminish csv-mode corfu-terminal company cape beacon auctex all-the-icons-completion)))
+   '(symbol-overlay rust-mode gap-mode eglot zenburn-theme yasnippet-snippets writeroom-mode wc-mode vertico smartparens pdf-tools neotree move-text markdown-mode marginalia magit kind-icon hl-todo highlight-numbers fill-column-indicator exec-path-from-shell esup diminish csv-mode corfu-terminal company cape beacon auctex all-the-icons-completion)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

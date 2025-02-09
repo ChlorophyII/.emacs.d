@@ -95,6 +95,16 @@
 									   :weight ultra-bold)))
   :hook (after-init-hook . show-paren-mode))
 
+(use-package symbol-overlay
+  ;; Highlight symbols with keymap-enabled overlays
+  :ensure t
+  :bind
+  (("M-i" . symbol-overlay-put)
+   ("M-n" . symbol-overlay-switch-forward)
+   ("M-p" . symbol-overlay-switch-backward)
+   ("<f7>" . symbol-overlay-mode)
+   ("<f8>" . symbol-overlay-remove-all)))
+
 (use-package beacon
   ;; Highlight the cursor whenever the window scrolls
   :ensure t

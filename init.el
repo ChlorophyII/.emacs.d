@@ -171,7 +171,7 @@
 							(writeroom-adjust-width
 							 (truncate (- (max 80
 											   (* 0.52 (/ (display-pixel-width)
-														 (frame-char-width))))
+														  (frame-char-width))))
 										  writeroom-width)))))
   :config
   (setf (cdr (assq 'continuation fringe-indicator-alist))

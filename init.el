@@ -351,6 +351,14 @@
 				   ("rust-analyzer" :initializationOptions
                     (:check (:command "clippy")))))))
 
+(use-package rustic
+  ;; Rust development environment
+  :ensure t
+  :hook ('eglot--managed-mode . (lambda () (flymake-mode -1)))
+  :custom
+  (rustic-analyzer-command '("rustup" "run" "stable" "rust-analyzer"))
+  (rustic-lsp-client 'eglot))
+
 (use-package yaml-mode
   ;; Major mdoe for editing YAML files
   :ensure t :defer t)

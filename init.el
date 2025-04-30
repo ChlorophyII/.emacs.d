@@ -375,6 +375,16 @@
 
 ;; =============================================================================
 
+(use-package vterm
+  ;; Fully-featured terminal emulator
+  :ensure t)
+
+(use-package multi-vterm
+  ;; Like multi-term.el but for vterm
+  :ensure t)
+
+;; =============================================================================
+
 (use-package corfu
   ;; COmpletion in Region FUnction
   :ensure t

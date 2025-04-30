@@ -288,6 +288,13 @@
 						 ("rust-analyzer" :initializationOptions
                           (:check (:command "clippy"))))))
 
+
+(use-package flycheck
+  ;; On-the-fly syntax checking.
+  :ensure t
+  :init
+  (global-flycheck-mode))
+
 ;; =============================================================================
 
 (use-package corfu

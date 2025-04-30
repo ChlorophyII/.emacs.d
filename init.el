@@ -39,6 +39,7 @@
   (when (display-graphic-p)
 	(tool-bar-mode 0)
 	(scroll-bar-mode 0))
+  (global-auto-revert-mode 1)
   (defun display-startup-echo-area-message ()
 	"Appear in the echo area when starting Emacs."
 	(message "Emacs Rocks!")))

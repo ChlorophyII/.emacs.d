@@ -315,13 +315,20 @@
 
 ;; =============================================================================
 
+(use-package ruff-format
+  ;; Ruff format Python source
+  :ensure t
+  :diminish ruff-format-on-save-mode)
+
 (use-package python
   ;; Python major mode
   :defer t
+  :after ruff-format
   :custom ((python-shell-interpreter "ipython")
 		   (python-shell-interpreter-args "--simple-prompt --colors=Linux")
 		   (python-indent 4)
-		   (tab-width 4)))
+		   (tab-width 4))
+  :hook (python-mode . ruff-format-on-save-mode))
 
 (use-package cc-mode
   :custom (c-basic-offset 4))

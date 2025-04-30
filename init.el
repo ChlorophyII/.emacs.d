@@ -323,6 +323,9 @@
 		   (python-indent 4)
 		   (tab-width 4)))
 
+(use-package cc-mode
+  :custom (c-basic-offset 4))
+
 (use-package markdown-mode
   ;; Major mode for Markdown-formatted text
   :ensure t :defer t)

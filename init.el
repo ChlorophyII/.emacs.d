@@ -253,15 +253,30 @@
   :defer t
   :custom ((org-startup-truncated nil)
 		   (org-adapt-indentation t))
+  :config
+  (defvar my/org-last-src-language "python"
+	"The last language used in `my/org-insert-code-block'")
+  (defun my/org-insert-code-block ()
+	"Insert a code block at point with language prompt and proper cursor positioning."
+	(interactive)
+	(let ((lang (read-string (format "Language [%s]: " my/org-last-src-language)
+							 nil nil my/org-last-src-language))
+		  (start-point (point)))
+	  (setq my/org-last-src-language lang)
+	  (insert (format "#+BEGIN_SRC %s\n\n#+END_SRC" lang))
+	  (save-excursion
+		(goto-char start-point)
+		(org-indent-line)
+		(forward-line 1)
+		(org-indent-line)
+		(forward-line 1)
+		(org-indent-line))
+	  (goto-char start-point)
+	  (forward-line 1)
+	  (org-indent-line)
+	  (org-edit-src-code)))
   :bind (:map org-mode-map
-			  ("C-c e" . (lambda () (interactive)
-						   (progn (indent-for-tab-command)
-								  (insert "#+BEGIN_EXPORT latex")
-								  (newline-and-indent 2)
-								  (insert "#+END_EXPORT")
-								  (forward-line -1)
-								  (indent-for-tab-command)
-								  (org-edit-export-block))))))
+			  ("C-c e" . my/org-insert-code-block)))
 
 ;; =============================================================================
 

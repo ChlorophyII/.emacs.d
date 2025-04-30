@@ -349,6 +349,13 @@
 						 ("rust-analyzer" :initializationOptions
                           (:check (:command "clippy"))))))
 
+(use-package yaml-mode
+  ;; Major mdoe for editing YAML files
+  :ensure t :defer t)
+
+(use-package yaml-pro
+  ;; Parser-aided YAML editing features
+  :ensure t :defer t)
 
 (use-package flycheck
   ;; On-the-fly syntax checking.

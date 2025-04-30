@@ -22,14 +22,16 @@
   ;; Escape Meta Alt Control Shift
   :custom ((initial-scratch-message "")
 		   (inhibit-startup-message t)
-		   (visible-bell t))
+		   (visible-bell t)
+		   (display-fill-column-indicator-column 120))
   :bind (("C-x <up>" . 'windmove-up)
 		 ("C-x <down>" . 'windmove-down)
 		 ("C-x <right>" . 'windmove-right)
 		 ("C-x <left>" . 'windmove-left)
 		 ("s-\\" . 'comment-or-uncomment-region))
   :hook ((prog-mode . display-line-numbers-mode)
-		 (prog-mode . hs-minor-mode))
+		 (prog-mode . hs-minor-mode)
+		 (prog-mode . display-fill-column-indicator-mode))
   :init (add-to-list 'package-archives
 					 '("melpa" . "https://melpa.org/packages/") t)
   :config
@@ -158,13 +160,6 @@
   :ensure t
   :custom (wc-modeline-format "WC[%w %tw %tc]")
   :hook text-mode)
-
-(use-package fill-column-indicator
-  ;; Graphically indicate the fill column
-  :ensure t
-  :custom ((fci-rule-column 80)
-		   (fci-rule-color "#4f4f4f"))
-  :hook (prog-mode . fci-mode))
 
 (use-package marginalia
   ;; Enrich existing commands with completion annotations

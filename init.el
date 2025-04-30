@@ -88,6 +88,37 @@
   ;; A Git porcelain inside Emacs.
   :ensure t :defer t)
 
+(use-package blamer
+  ;; Show git blame info about current line.
+  :ensure t
+  :defer t
+  :bind (("s-i" . blamer-show-commit-info)
+		 ("C-c i" . blamer-show-posframe-commit-info))
+  :defer 5
+  :custom
+  (blamer-idle-time 0.3)
+  (blamer-min-offset 40)
+  (blamer-max-commit-message-length 140)
+  (blamer-posframe-configurations
+   '(:left-fringe 16
+				  : right-fringe 16
+				  :y-pixel-offset 20
+				  :x-pixel-offset -20
+				  :internal-border-width 1
+				  :internal-border-color "#61AFEF"
+				  :min-width 30
+				  :width 40
+				  :max-width 80
+				  :lines-truncate nil
+				  :accept-focus nil))
+  :custom-face
+  (blamer-face ((t :foreground "#7a88cf"
+				   :background nil
+				   :height 120
+				   :italic t)))
+  :config
+  (global-blamer-mode 1))
+
 (use-package paren
   ;; Highlights matching parens
   :custom ((show-paren-style 'parenthesis)

@@ -344,10 +344,12 @@
 (use-package rust-mode
   :ensure t
   :hook (rust-mode . eglot-ensure)
-  :config (add-to-list 'eglot-server-programs
-					   '((rust-ts-mode rust-mode) .
-						 ("rust-analyzer" :initializationOptions
-                          (:check (:command "clippy"))))))
+  :config
+  (with-eval-after-load 'eglot
+	(add-to-list 'eglot-server-programs
+				 '((rust-ts-mode rust-mode) .
+				   ("rust-analyzer" :initializationOptions
+                    (:check (:command "clippy")))))))
 
 (use-package yaml-mode
   ;; Major mdoe for editing YAML files

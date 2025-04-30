@@ -119,6 +119,10 @@
   :config
   (global-blamer-mode 1))
 
+(use-package ag
+  ;; A front-end for ag ('the silver searcher'), the C ack replacement
+  :ensure t)
+
 (use-package paren
   ;; Highlights matching parens
   :custom ((show-paren-style 'parenthesis)
